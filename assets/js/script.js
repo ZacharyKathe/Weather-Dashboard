@@ -4,7 +4,10 @@ var fetchButton = document.getElementById('get-button');
 
 function getApi() {
     var searchField = document.getElementById('searchField')
-    
+    //saving search data
+    localStorage.setItem("searchedCity", searchField.value);
+    //showMessage();<-- could not ge this to work :(
+
   // fetch request 
   var requestUrl =  'http://api.openweathermap.org/data/2.5/forecast?zip='+searchField.value+'&units=imperial&appid=03f0c8b418c584aa207b383e5b4ab47c';
   ;
@@ -14,18 +17,18 @@ function getApi() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
-      console.log(data.list)
+     console.log(data)
+      //console.log(data.list)
 
       //Loop over the data to generate a table
       for (var i = 0; i < data.list.length; i++) {
         fiveDays = data.list.filter(function(value, index, Arr){
             return index % 7 == 0;
         })
-        console.log(fiveDays)
+        
 
-        iconArray = fiveDays[i].weather[0].icon
-        console.log(iconArray)
+        iconArray = fiveDays[i].weather[0].icon;
+        
         // Creating elements
         var createTableRow = document.createElement('tr');
         var tableData = document.createElement('td');
@@ -36,8 +39,9 @@ function getApi() {
         var dateStamp = document.createElement('p');
         var typeDay = document.createElement('p');
         var icon = document.createElement('img')
+        
 
-        //clearing old info for new
+        //clearing old info for newvar table
         
         
         // Setting the text-- looping through array
@@ -48,6 +52,8 @@ function getApi() {
         feelsLike.textContent = "Feels like: "+ fiveDays[i].main.feels_like;
         tempMin.textContent = "Low: "+ fiveDays[i].main.temp_min;
         pTag.textContent = "Humidity: "+ fiveDays[i].main.humidity;
+        
+        
         //
         //changing colors
         createTableRow.style.backgroundColor = '#3d85c6';
@@ -60,9 +66,10 @@ function getApi() {
         tempMin.style.marginLeft = '18px';
         pTag.style.marginLeft = '18px'; 
 
-        // Appending the link to the tabledata and then appending the tabledata to the tablerow
-        // The tablerow then gets appended to the tablebody
+        // Appending the tabledata 
+
         tableData.appendChild(dateStamp);
+        //tableData.appendChild(cityName);
         tableData.appendChild(icon);
         tableData.appendChild(typeDay);
         tableData.appendChild(temp);
@@ -74,7 +81,10 @@ function getApi() {
         
         
       }
+      
     });
+    
+  
 }
 
 fetchButton.addEventListener('click', getApi);
@@ -85,14 +95,12 @@ function changeColorClouds(){
     }
 } 
 
-//var createTableRow = document.createElement('tr');
-//var tableData = document.createElement('td');
-//var content = document.createElement('p');
-//content.textContent = condencedWeather[0].the_temp;
-//resultsArea.innerHTML = condencedWeather[0].the_temp;
-//console.log(content);
-//tableData.appendChild(content);
-//createTableRow.appendChild(tableData);
-//tableBody.appendChild(createTableRow)
-//
+function showMessage(){
+  var last = document.getElementById('lastzipcode')
+  var zipcode = JSON.parse(localStorage.getItem("searchedCity"));
+  if (zipcode !== null){
+   last.textContent = zipcode;
+  }
+}
+
 

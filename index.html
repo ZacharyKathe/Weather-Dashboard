@@ -17,11 +17,13 @@
 <body>
     <header class="col-lg-12 col-md-12 col-12 text-center">Weather Dashboard</header>
     <aside>
-    <input type="text" id="searchField" name="search" placeholder="Search...">
+    <input type="text" id="searchField" name="search" placeholder="Zip Code Only!!">
     <button class="btn-success" id="get-button">
-        Search
+        Search..
       </button>
+      <p class="belowSearch">Type a Zip code in the search bar and click 'search' to get a weather report.</p>
     </aside>
+    <p id="lastzipcode"></p>
 
     <table class=" justify-center align-items-center" id="results">
         <th>
