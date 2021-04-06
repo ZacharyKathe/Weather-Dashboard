@@ -9,7 +9,7 @@ function getApi() {
     //showMessage();<-- could not ge this to work :(
 
   // fetch request 
-  var requestUrl =  'http://api.openweathermap.org/data/2.5/forecast?zip='+searchField.value+'&units=imperial&appid=03f0c8b418c584aa207b383e5b4ab47c';
+  var requestUrl =  'https://api.openweathermap.org/data/2.5/forecast?zip='+searchField.value+'&units=imperial&appid=03f0c8b418c584aa207b383e5b4ab47c';
   ;
 
   fetch(requestUrl)
